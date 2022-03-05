@@ -39,20 +39,28 @@ document.querySelector("#button_igual").addEventListener("click", () => {
         }
     }
 
-    console.log(vetor);
+    let cont = 1;
+    let resposta;
 
-    let resposta = vetor[0];
-    for (let cont = 1; cont < vetor.length; cont += 2) {
-        resposta += vetor[cont - 1];
-        // console.log(cont);
-        if (vetor[cont] == "*") {
-            resposta *= vetor[cont + 1];
+    if (vetor[0] == "-") {
+        resposta = Number(vetor[1]) * -1;
+        cont = 2;
+    } else {
+        resposta = Number(vetor[0]);
+    }
+
+    for (; cont < vetor.length; cont += 2) {
+        if (vetor[cont] == "x") {
+            resposta *= Number(vetor[cont + 1]);
         } else if (vetor[cont] == "/") {
-            resposta /= vetor[cont + 1];
+            resposta /= Number(vetor[cont + 1]);
         } else if (vetor[cont] == "+") {
-            resposta += vetor[cont + 1]
+            resposta += Number(vetor[cont + 1])
+        } else if (vetor[cont] == "-") {
+            resposta -= Number(vetor[cont + 1]);
         }
     }
+    resultado.value = String(resposta);
 })
 
 function buttonNumber(buttonPresionado) {
