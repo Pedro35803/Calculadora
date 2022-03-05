@@ -12,6 +12,9 @@ document.querySelector("#button_07").addEventListener("click", () => buttonNumbe
 document.querySelector("#button_08").addEventListener("click", () => buttonNumber("8"));
 document.querySelector("#button_09").addEventListener("click", () => buttonNumber("9"));
 
+document.querySelector("#ponto").addEventListener("click", () => buttonNumber("."));
+document.querySelector("#zero").addEventListener("click", () => buttonNumber("0"));
+
 document.querySelector("#limpar").addEventListener("click", () => limpar());
 
 document.querySelector("#somar").addEventListener("click", () => adicionarOperacao("+"));
@@ -20,10 +23,36 @@ document.querySelector("#multiplicar").addEventListener("click", () => adicionar
 document.querySelector("#dividir").addEventListener("click", () => adicionarOperacao("/"));
 
 document.querySelector("#button_igual").addEventListener("click", () => {
-    for (let cont = 0; cont < resultado.textContent.length; cont++) {
-        console.log(resultado.textContent[cont]);
+    let numero = "";
+    let vetor = [];
+    let elementos = resultado.textContent;
+
+    for (let cont = 0; cont <= elementos.length; cont++) {
+        if (elementos[cont] == "x" || elementos[cont] == "+" || elementos[cont] == "/" || elementos[cont] == "-") {
+            vetor.push(numero);
+            vetor.push(elementos[cont]);
+            numero = "";
+        } else if (cont == elementos.length) {
+            vetor.push(numero);
+        } else {
+            numero += elementos[cont];
+        }
     }
-    limpar()
+
+    console.log(vetor);
+
+    let resposta = vetor[0];
+    for (let cont = 1; cont < vetor.length; cont += 2) {
+        resposta += vetor[cont - 1];
+        // console.log(cont);
+        if (vetor[cont] == "*") {
+            resposta *= vetor[cont + 1];
+        } else if (vetor[cont] == "/") {
+            resposta /= vetor[cont + 1];
+        } else if (vetor[cont] == "+") {
+            resposta += vetor[cont + 1]
+        }
+    }
 })
 
 function buttonNumber(buttonPresionado) {
@@ -35,5 +64,12 @@ function limpar() {
 }
 
 function adicionarOperacao(operacao) {
-    resultado.textContent += operacao;
+    let indice = resultado.textContent.length - 1
+    let ultimoElemento = resultado.textContent[indice];
+
+    if (ultimoElemento == Number(ultimoElemento)) {
+        resultado.textContent += operacao;
+    } else if (ultimoElemento != "-" && operacao == "-") {
+        resultado.textContent += operacao;
+    }
 }
