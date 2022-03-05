@@ -1,0 +1,27 @@
+.btn-warning {
+  background: linear-gradient(180deg, #ffca2c, #fff41f);
+}
+
+.btn-danger {
+    background: linear-gradient(180deg, #BB2D3B, #D13B28);
+}
+
+.btn-primary {
+    background: linear-gradient(180deg, #0B62E3, #0D6EFD);
+}
+
+.btn-secondary {
+    background: linear-gradient(180deg, #6C757D, #788E94);
+    transition: color 0.15 ease-in-out 0s;
+}
+
+.btn-secondary::after {
+    background: linear-gradient(180deg, #565D63, #6C757D);
+}
+
+.btn-warning:focus,
+.btn-primary:focus,
+.btn-secondary:focus,
+.btn-danger:focus {
+  box-shadow: none;
+}

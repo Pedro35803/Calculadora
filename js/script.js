@@ -25,7 +25,7 @@ document.querySelector("#dividir").addEventListener("click", () => adicionarOper
 document.querySelector("#button_igual").addEventListener("click", () => {
     let numero = "";
     let vetor = [];
-    let elementos = resultado.textContent;
+    let elementos = resultado.value;
 
     for (let cont = 0; cont <= elementos.length; cont++) {
         if (elementos[cont] == "x" || elementos[cont] == "+" || elementos[cont] == "/" || elementos[cont] == "-") {
@@ -56,20 +56,20 @@ document.querySelector("#button_igual").addEventListener("click", () => {
 })
 
 function buttonNumber(buttonPresionado) {
-    resultado.textContent += buttonPresionado;
+    resultado.value += buttonPresionado;
 }
 
 function limpar() {
-    resultado.textContent = "";
+    resultado.value = "";
 }
 
 function adicionarOperacao(operacao) {
-    let indice = resultado.textContent.length - 1
-    let ultimoElemento = resultado.textContent[indice];
+    let indice = resultado.value.length - 1
+    let ultimoElemento = resultado.value[indice];
 
     if (ultimoElemento == Number(ultimoElemento)) {
-        resultado.textContent += operacao;
+        resultado.value += operacao;
     } else if (ultimoElemento != "-" && operacao == "-") {
-        resultado.textContent += operacao;
+        resultado.value += operacao;
     }
 }
