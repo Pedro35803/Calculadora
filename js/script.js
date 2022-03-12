@@ -12,7 +12,7 @@ document.querySelector("#button_07").addEventListener("click", () => buttonNumbe
 document.querySelector("#button_08").addEventListener("click", () => buttonNumber("8"));
 document.querySelector("#button_09").addEventListener("click", () => buttonNumber("9"));
 
-document.querySelector("#ponto").addEventListener("click", () => buttonNumber("."));
+document.querySelector("#ponto").addEventListener("click", () => adicionarOperacao("."));
 document.querySelector("#zero").addEventListener("click", () => buttonNumber("0"));
 
 document.querySelector("#limpar").addEventListener("click", () => limpar());
@@ -28,7 +28,7 @@ document.querySelector("#button_igual").addEventListener("click", () => {
     let elementos = resultado.value;
 
     for (let cont = 0; cont <= elementos.length; cont++) {
-        if (elementos[cont] == "x" || elementos[cont] == "+" || elementos[cont] == "/" || elementos[cont] == "-") {
+        if (verificarOperador(elementos[cont]) == true) {
             vetor.push(numero);
             vetor.push(elementos[cont]);
             numero = "";
@@ -38,6 +38,8 @@ document.querySelector("#button_igual").addEventListener("click", () => {
             numero += elementos[cont];
         }
     }
+
+    // for (let cont = 0; cont)
 
     let cont = 1;
     let resposta;
@@ -72,12 +74,29 @@ function limpar() {
 }
 
 function adicionarOperacao(operacao) {
-    let indice = resultado.value.length - 1
+    let indice = resultado.value.length - 1;
     let ultimoElemento = resultado.value[indice];
 
-    if (ultimoElemento == Number(ultimoElemento)) {
+    if (ultimoElemento != "-" && operacao == "-") {
         resultado.value += operacao;
-    } else if (ultimoElemento != "-" && operacao == "-") {
+    } else if (resultado.value == "") {
+        null;
+    } else if (verificarOperador(ultimoElemento) == false) {
         resultado.value += operacao;
+    }
+}
+
+function verificarOperador(valor) {
+    switch (valor) {
+        case "+":
+            return true;
+        case "-":
+            return true;
+        case "x":
+            return true;
+        case "/":
+            return true;
+        default:
+            return false;
     }
 }
