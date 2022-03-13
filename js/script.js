@@ -50,6 +50,7 @@ function buttonNumber(buttonPresionado) {
     if (mudarNumero == true) {
         resultado.value = "";
         mudarNumero = false;
+        // resultado.classList.toggle("text-dark");
     }
     resultado.value += buttonPresionado;
 }
@@ -91,6 +92,8 @@ function buttonIgual() {
 
 function piscarAoFazerUmaOperação() {
     resultado.value = "";
+    // resultado.classList.toggle("text-info");
+
     setTimeout(() => {
         resultado.value = guardarNumero;
     }, 50);
