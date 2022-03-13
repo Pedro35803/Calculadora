@@ -1,3 +1,8 @@
+let listaDeTeclasNumeros = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+let listaDeTeclasOperadores = ['/', '=', '+', '-', '*'];
+let listaDeTeclasParaIgual = ['Enter', '='];
+let listaDeTeclasParaVirguras = [',', '.'];
+
 let resultado = document.querySelector("#resultado");
 let guardarOperador = false;
 let mudarNumero = true;
@@ -21,15 +26,25 @@ document.querySelector("#limpar").addEventListener("click", () => limpar());
 
 document.querySelector("#somar").addEventListener("click", () => calcular("+"));
 document.querySelector("#subtrair").addEventListener("click", () => calcular("-"));
-document.querySelector("#multiplicar").addEventListener("click", () => calcular("x"));
+document.querySelector("#multiplicar").addEventListener("click", () => calcular("*"));
 document.querySelector("#dividir").addEventListener("click", () => calcular("/"));
 
-document.querySelector("#button_igual").addEventListener("click", () => {
-    if (resultado.value != "") {
-        calcular(false);
-        piscarAoFazerUmaOperação();
+document.querySelector("#button_igual").addEventListener("click", () => buttonIgual());
+
+document.addEventListener("keydown", (event) => {
+    if (listaDeTeclasNumeros.indexOf(event.key) != -1) {
+        buttonNumber(event.key);
+    } else if (listaDeTeclasOperadores.indexOf(event.key) != -1) {
+        calcular(event.key);
+    } else if (listaDeTeclasParaVirguras.indexOf(event.key) != -1) {
+        adicionarPonto();
+    } else if (listaDeTeclasParaIgual.indexOf(event.key) != -1) {
+        buttonIgual();
+    } else if (event.key == 'Backspace') {
+        limpar();
     }
-})
+});
+
 
 function buttonNumber(buttonPresionado) {
     if (mudarNumero == true) {
@@ -68,6 +83,12 @@ function adicionarPonto() {
     }
 }
 
+function buttonIgual() {
+    if (resultado.value != "") {
+        calcular(false);
+    }
+}
+
 function piscarAoFazerUmaOperação() {
     resultado.value = "";
     setTimeout(() => {
@@ -81,7 +102,7 @@ function calcularElementos(numeroAntes, operador, numeroDepois) {
             return numeroAntes + numeroDepois;
         case "-":
             return numeroAntes - numeroDepois;
-        case "x":
+        case "*":
             return numeroAntes * numeroDepois;
         case "/":
             return numeroAntes / numeroDepois;
