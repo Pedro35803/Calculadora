@@ -50,8 +50,8 @@ function buttonNumber(buttonPresionado) {
     if (mudarNumero == true) {
         resultado.value = "";
         mudarNumero = false;
-        // resultado.classList.toggle("text-dark");
     }
+    resultado.style.color = "#000";
     resultado.value += buttonPresionado;
 }
 
@@ -87,12 +87,13 @@ function adicionarPonto() {
 function buttonIgual() {
     if (resultado.value != "") {
         calcular(false);
+        resultado.style.color = "#23913D";
     }
 }
 
 function piscarAoFazerUmaOperação() {
     resultado.value = "";
-    // resultado.classList.toggle("text-info");
+    resultado.style.color = "#6c757d";
 
     setTimeout(() => {
         resultado.value = guardarNumero;
