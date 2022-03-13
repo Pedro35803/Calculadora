@@ -62,7 +62,7 @@ function limpar() {
 }
 
 function calcular(operador) {
-    if (resultado.value != "" && mudarNumero == false) {
+    if (resultado.value != "" || mudarNumero == false) {
         let numero = Number(resultado.value);
     
         if (guardarOperador != false) {
