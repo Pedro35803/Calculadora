@@ -1,7 +1,6 @@
-let listaDeTeclasNumeros = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+let listaDeTeclasConcatenar = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ',', '.'];
 let listaDeTeclasOperadores = ['/', '=', '+', '-', '*'];
 let listaDeTeclasParaIgual = ['Enter', '='];
-let listaDeTeclasParaVirguras = [',', '.'];
 
 let resultado = document.querySelector("#resultado");
 let guardarOperador = false;
@@ -25,12 +24,10 @@ document.querySelector("#dividir").addEventListener("click", () => calcular("/")
 document.querySelector("#button_igual").addEventListener("click", () => buttonIgual());
 
 document.addEventListener("keydown", (event) => {
-    if (listaDeTeclasNumeros.indexOf(event.key) != -1) {
+    if (listaDeTeclasConcatenar.indexOf(event.key) != -1) {
         buttonNumber(event.key);
     } else if (listaDeTeclasOperadores.indexOf(event.key) != -1) {
         calcular(event.key);
-    } else if (listaDeTeclasParaVirguras.indexOf(event.key) != -1) {
-        adicionarPonto();
     } else if (listaDeTeclasParaIgual.indexOf(event.key) != -1) {
         buttonIgual();
     } else if (event.key == 'Backspace') {
@@ -45,7 +42,7 @@ function buttonNumber(buttonPresionado) {
         mudarNumero = false;
     }
 
-    if (buttonPresionado == ".") {
+    if (buttonPresionado == "." || buttonPresionado == ",") {
         adicionarPonto();
     } else if (buttonPresionado == "0") {
         adicionarZero();
@@ -81,6 +78,12 @@ function calcular(operador) {
 function adicionarPonto() {
     if (resultado.value.indexOf(".") == -1 && resultado.value != "") {
         resultado.value += "."
+    }
+}
+
+function adicionarZero() {
+    if (resultado.value != "") {
+        resultado.value += "0"
     }
 }
 
