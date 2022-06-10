@@ -9,16 +9,16 @@ let mudarNumero = true;
 let guardarNumero = 0;
 
 const todosNumeros = document.querySelectorAll(".button-numbers");
-const oi = (element) => console.log(element.target.textContent);
+const todasOperacoes = document.querySelectorAll(".button-Operations");
 
-todosNumeros.forEach(numero => numero.addEventListener('click', buttonNumber));
+todosNumeros.forEach(numero => numero.addEventListener('click', (numero) => {
+    const conteudoBotao = numero.target.textContent;
+    buttonNumber(conteudoBotao);
+}));
+
+todasOperacoes.forEach(operacoes => operacoes.addEventListener('click', calcular));
 
 document.querySelector("#limpar").addEventListener("click", () => limpar());
-
-document.querySelector("#somar").addEventListener("click", () => calcular("+"));
-document.querySelector("#subtrair").addEventListener("click", () => calcular("-"));
-document.querySelector("#multiplicar").addEventListener("click", () => calcular("*"));
-document.querySelector("#dividir").addEventListener("click", () => calcular("/"));
 
 document.querySelector("#button_igual").addEventListener("click", () => buttonIgual());
 
@@ -38,20 +38,18 @@ document.addEventListener("keydown", (event) => {
 
 
 function buttonNumber(buttonPresionado) {
-    const conteudoBotao = buttonPresionado.target.textContent;
-
     if (mudarNumero == true) {
         resultado.value = "";
         mudarNumero = false;
     }
 
-    if (conteudoBotao == ".") {
+    if (buttonPresionado == ".") {
         adicionarPonto();
-    } else if (conteudoBotao == "0") {
+    } else if (buttonPresionado == "0") {
         adicionarZero();
     } else {
         resultado.style.color = "#000";
-        resultado.value += conteudoBotao;
+        resultado.value += buttonPresionado;
     }
 }
 
@@ -62,16 +60,19 @@ function limpar() {
 }
 
 function calcular(operador) {
+    let conteudoBotao = operador.target.textContent;
+    conteudoBotao = conteudoBotao.replace("X", "*");
+
     if (resultado.value != "" || mudarNumero == false) {
         let numero = Number(resultado.value);
     
-        if (guardarOperador != false) {
+        if (guardarOperador) {
             guardarNumero = calcularElementos(guardarNumero, guardarOperador, numero)
         } else {
             guardarNumero = numero;
         }
     
-        guardarOperador = operador;
+        guardarOperador = conteudoBotao;
         mudarNumero = true;
 
         piscarAoFazerUmaOperação();
@@ -93,6 +94,12 @@ function adicionarZero() {
 function buttonIgual() {
     if (resultado.value != "") {
         calcular(false);
+        guardarNumero = calcularElementos(guardarNumero, guardarOperador, numero)
+        guardarOperador = false;
+        mudarNumero = true;
+        
+        piscarAoFazerUmaOperação();
+        
         resultado.style.color = "#23913D";
     }
 }
@@ -112,7 +119,7 @@ function calcularElementos(numeroAntes, operador, numeroDepois) {
             return numeroAntes + numeroDepois;
         case "-":
             return numeroAntes - numeroDepois;
-        case "*":
+        case "X":
             return numeroAntes * numeroDepois;
         case "/":
             return numeroAntes / numeroDepois;
