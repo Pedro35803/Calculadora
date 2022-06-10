@@ -38,12 +38,21 @@ document.addEventListener("keydown", (event) => {
 
 
 function buttonNumber(buttonPresionado) {
+    const conteudoBotao = buttonPresionado.target.textContent;
+
     if (mudarNumero == true) {
         resultado.value = "";
         mudarNumero = false;
     }
-    resultado.style.color = "#000";
-    resultado.value += buttonPresionado.target.textContent;
+
+    if (conteudoBotao == ".") {
+        adicionarPonto();
+    } else if (conteudoBotao == "0") {
+        adicionarZero();
+    } else {
+        resultado.style.color = "#000";
+        resultado.value += conteudoBotao;
+    }
 }
 
 function limpar() {
@@ -72,6 +81,12 @@ function calcular(operador) {
 function adicionarPonto() {
     if (resultado.value.indexOf(".") == -1 && resultado.value != "") {
         resultado.value += "."
+    }
+}
+
+function adicionarZero() {
+    if (resultado.value != "") {
+        resultado.value += "0"
     }
 }
 
