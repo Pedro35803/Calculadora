@@ -8,20 +8,13 @@ let guardarOperador = false;
 let mudarNumero = true;
 let guardarNumero = 0;
 
-document.querySelector("#button_01").addEventListener("click", () => buttonNumber("1"));
-document.querySelector("#button_02").addEventListener("click", () => buttonNumber("2"));
-document.querySelector("#button_03").addEventListener("click", () => buttonNumber("3"));
+const todosNumeros = document.querySelectorAll(".button-numbers");
 
-document.querySelector("#button_04").addEventListener("click", () => buttonNumber("4"));
-document.querySelector("#button_05").addEventListener("click", () => buttonNumber("5"));
-document.querySelector("#button_06").addEventListener("click", () => buttonNumber("6"));
+todosNumeros.forEach(numero => numero.addEventListener('click', (numero) => {
+    const conteudoBotao = numero.target.textContent;
+    buttonNumber(conteudoBotao);
+}));
 
-document.querySelector("#button_07").addEventListener("click", () => buttonNumber("7"));
-document.querySelector("#button_08").addEventListener("click", () => buttonNumber("8"));
-document.querySelector("#button_09").addEventListener("click", () => buttonNumber("9"));
-
-document.querySelector("#ponto").addEventListener("click", () => adicionarPonto());
-document.querySelector("#zero").addEventListener("click", () => buttonNumber("0"));
 document.querySelector("#limpar").addEventListener("click", () => limpar());
 
 document.querySelector("#somar").addEventListener("click", () => calcular("+"));
@@ -51,8 +44,15 @@ function buttonNumber(buttonPresionado) {
         resultado.value = "";
         mudarNumero = false;
     }
-    resultado.style.color = "#000";
-    resultado.value += buttonPresionado;
+
+    if (buttonPresionado == ".") {
+        adicionarPonto();
+    } else if (buttonPresionado == "0") {
+        adicionarZero();
+    } else {
+        resultado.style.color = "#000";
+        resultado.value += buttonPresionado;
+    }
 }
 
 function limpar() {
