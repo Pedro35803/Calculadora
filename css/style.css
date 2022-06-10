@@ -67,16 +67,16 @@ body {
   grid-area: zero;
 }
 
-.button-function {
+.button-Operations {
   background: linear-gradient(180deg, #ffca2c, #fff41f);
   color: black;
 }
 
-.button-function:hover {
+.button-Operations:hover {
   background: linear-gradient(180deg, #F7C42A, #F2E81D);
 }
 
-.button-function:active:hover {
+.button-Operations:active:hover {
   box-shadow: 0 0 0 .25rem rgba(217,164,6,.5);
 }
 
