@@ -2,7 +2,7 @@
 
 <div>
   <a href="https://github.com/Pedro35803/Calculadora">
-    <img src="https://img.shields.io/badge/version-1.0.0-0D6EFD.svg?cacheSeconds=2592000" alt="Version 1.0.0"/>
+    <img src="https://img.shields.io/badge/version-1.1.0-0D6EFD.svg?cacheSeconds=2592000" alt="Version 1.1.0"/>
     <img src="https://img.shields.io/static/v1?label=PRs&message=welcome&color=afaf7c&labelColor=303030" alt="PRs welcome!"/>
   </a>
   
